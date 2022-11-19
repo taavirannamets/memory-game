@@ -34,7 +34,7 @@ function App() {
 		choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
 	}
 
-	// Compare 2 selected cards
+	// Compare & match 2 selected cards
 	useEffect(() => {
 		if (choiceOne && choiceTwo) {
 			if (choiceOne.src === choiceTwo.src) {
@@ -47,14 +47,12 @@ function App() {
 						}
 					})
 				})
-				resetTurn()
+				setTimeout(() => resetTurn(), 1000)
 			} else {
-				resetTurn()
+				setTimeout(() => resetTurn(), 1000)
 			}
 		}
 	}, [choiceOne, choiceTwo])
-
-	console.log(cards)
 
 	// Reset choices & increase turn
 	const resetTurn = () => {
@@ -69,7 +67,12 @@ function App() {
 			<button onClick={shuffleCards}>New game</button>
 			<div className='card-grid'>
 				{cards.map(card => (
-					<Card key={card.id} card={card} handleChoice={handleChoice} />
+					<Card
+						key={card.id}
+						card={card}
+						handleChoice={handleChoice}
+						flipped={card === choiceOne || card === choiceTwo || card.matched}
+					/>
 				))}
 			</div>
 		</div>
