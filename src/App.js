@@ -31,6 +31,7 @@ function App() {
 
 	// Handle card choice
 	const handleChoice = card => {
+		if (card.id === choiceOne?.id) return // Preventing clicking the first card twice
 		choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
 	}
 
